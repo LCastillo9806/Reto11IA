@@ -31,6 +31,14 @@ App Android (Kotlin) que integra **inteligencia artificial generativa** en tres 
 - **Pantalla de Ajustes:** llave de API, modelos de Gemini y personalidad del chatbot.
 - **La conversación no se pierde** al girar el teléfono ni al cambiar de pestaña (ViewModel).
 
+## 🎬 Video demostrativo
+
+Recorrido completo de la app (3 min 53 s) grabado en un Samsung Galaxy A03s, con respuestas reales de la IA: chatbot con memoria, generación de texto, generación de imágenes y cambio de personalidad del chatbot. Los tramos de espera aparecen acelerados y lo indica una etiqueta "▶▶ x2 / x3".
+
+<a href="video/demo_reto11.mp4"><img src="video/portada.png" width="240" alt="Ver el video demostrativo"></a>
+
+▶️ **[Ver el video (MP4)](video/demo_reto11.mp4)**
+
 ## Capturas de pantalla
 
 Tomadas en un Samsung Galaxy A03s (Android 13) con respuestas reales de la IA.
