@@ -1,0 +1,4 @@
+<resources>
+    <!-- Material 3, claro/oscuro automático, sin ActionBar (usamos MaterialToolbar) -->
+    <style name="Theme.Reto11IA" parent="Theme.Material3.DayNight.NoActionBar" />
+</resources>

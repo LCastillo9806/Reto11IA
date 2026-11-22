@@ -1,0 +1,7 @@
+<resources>
+    <!-- Colores de las burbujas del chat (modo oscuro) -->
+    <color name="bubble_user">#FF5C6BC0</color>
+    <color name="bubble_user_text">#FFFFFFFF</color>
+    <color name="bubble_model">#FF2B2F38</color>
+    <color name="bubble_error">#FF5A2626</color>
+</resources>

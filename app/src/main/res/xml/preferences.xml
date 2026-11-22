@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="@string/pref_cat_gemini"
+        app:iconSpaceReserved="false">
+
+        <!-- Si se deja vacía, se usa la de local.properties -->
+        <EditTextPreference
+            app:key="api_key"
+            app:title="@string/pref_api_key_title"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            app:key="get_key"
+            app:title="@string/pref_get_key_title"
+            app:summary="@string/pref_get_key_summary"
+            app:iconSpaceReserved="false" />
+
+        <!-- Los nombres de modelo se pueden cambiar si Google publica otros nuevos -->
+        <EditTextPreference
+            app:key="text_model"
+            app:title="@string/pref_text_model_title"
+            app:defaultValue="gemini-3.5-flash"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            app:key="image_model"
+            app:title="@string/pref_image_model_title"
+            app:defaultValue="gemini-3.1-flash-image"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/pref_cat_chat"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            app:key="chat_persona"
+            app:title="@string/pref_persona_title"
+            app:entries="@array/persona_entries"
+            app:entryValues="@array/persona_values"
+            app:defaultValue="general"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
