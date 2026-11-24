@@ -45,7 +45,7 @@ Repositorio: <https://github.com/LCastillo9806/Reto11IA>
 
 Las capturas se tomaron en un **Samsung Galaxy A03s (Android 13)** con respuestas reales de la IA.
 
-🎬 **Video demostrativo:** [video/demo_reto11.mp4](../video/demo_reto11.mp4) (3 min 53 s). Muestra las cuatro partes de este manual en el mismo orden: chatbot, texto, imágenes y ajustes.
+🎬 **Video demostrativo:** [video/demo_reto11.mp4](../video/demo_reto11.mp4) (3 min 57 s). Muestra las cuatro partes de este manual en el mismo orden: chatbot, texto, imágenes y ajustes.
 
 ## 3. Manual de uso
 
