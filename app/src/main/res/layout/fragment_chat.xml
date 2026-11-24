@@ -33,17 +33,19 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <!-- Logo de la app: hoja + circuito + destellos de IA -->
             <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:elevation="4dp"
                 android:importantForAccessibility="no"
-                android:src="@drawable/ic_sparkle"
-                app:tint="?attr/colorPrimary" />
+                android:src="@drawable/ic_logo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
                 android:text="@string/chat_empty_title"
                 android:textAppearance="?attr/textAppearanceTitleLarge" />
 
