@@ -126,7 +126,8 @@ La app nunca se cierra por un error: muestra un mensaje en español (en el chat,
 | Llave inválida | *"La llave de API no es válida. Revísala en Ajustes."* |
 | Modelo inexistente | *"El modelo "…" no existe o no está disponible para tu llave. Cámbialo en Ajustes."* |
 | Cuota agotada (429) | *"Se alcanzó el límite de uso de Gemini…"* |
-| Servidor ocupado (500/503) | La app reintenta sola 2 veces; si sigue fallando, lo avisa. |
+| Servidor ocupado (500/503) | La app reintenta sola 3 veces (2, 4 y 8 s) y, si sigue saturado, usa el **modelo de respaldo** `gemini-3.5-flash-lite`. Si todo falla, lo avisa. |
+| Gemini tarda demasiado (más de 120 s) | Prueba con el modelo de respaldo; si también tarda, muestra *"Gemini tardó demasiado en responder…"*. |
 | Sin Internet | *"No hay conexión a internet o el servidor no respondió."* |
 
 ## 4. Cómo funciona

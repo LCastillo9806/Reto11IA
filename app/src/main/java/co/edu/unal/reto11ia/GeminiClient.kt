@@ -8,6 +8,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
 import java.net.URL
 
 // =====================================================================
@@ -48,6 +49,9 @@ class GeminiClient(private val apiKey: String) {
 
     companion object {
         private const val BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/"
+
+        /** Modelo de respaldo para chat y texto: se usa si el principal está saturado o tarda demasiado. */
+        const val FALLBACK_TEXT_MODEL = "gemini-3.5-flash-lite"
     }
 
     /** CHATBOT: envía el historial completo para que la IA "recuerde" la conversación. */
@@ -62,7 +66,7 @@ class GeminiClient(private val apiKey: String) {
             .put("generationConfig", JSONObject().put("temperature", 0.7))
         systemInstruction?.let { body.put("systemInstruction", textParts(it)) }
 
-        return extractText(request(model, body, timeoutMs = 60_000))
+        return extractText(requestWithFallback(model, body, timeoutMs = 120_000))
     }
 
     /** GENERACIÓN DE TEXTO: un solo prompt, sin historial. */
@@ -70,7 +74,7 @@ class GeminiClient(private val apiKey: String) {
         val body = JSONObject()
             .put("contents", JSONArray().put(content("user", prompt)))
             .put("generationConfig", JSONObject().put("temperature", temperature))
-        return extractText(request(model, body, timeoutMs = 60_000))
+        return extractText(requestWithFallback(model, body, timeoutMs = 120_000))
     }
 
     /** GENERACIÓN DE IMÁGENES: le pedimos que responda con texto E imagen. */
@@ -117,8 +121,28 @@ class GeminiClient(private val apiKey: String) {
         JSONObject().put("parts", JSONArray().put(JSONObject().put("text", text)))
 
     /**
+     * Chat y texto: intenta con el modelo elegido y, si está saturado (500/503) o tarda
+     * demasiado, prueba con el modelo de respaldo. Así la app sigue funcionando cuando
+     * los servidores de Gemini tienen mucha demanda.
+     */
+    private suspend fun requestWithFallback(model: String, body: JSONObject, timeoutMs: Int): JSONObject {
+        var lastError: Exception? = null
+        for (m in listOf(model.trim(), FALLBACK_TEXT_MODEL).distinct()) {
+            try {
+                return request(m, body, timeoutMs)
+            } catch (e: GeminiException) {
+                if (e.httpCode < 500) throw e   // llave inválida, modelo inexistente...: no sirve reintentar
+                lastError = e
+            } catch (e: SocketTimeoutException) {
+                lastError = e                   // tardó demasiado: probamos con el respaldo
+            }
+        }
+        throw lastError!!
+    }
+
+    /**
      * Hace la petición HTTP y devuelve el JSON de respuesta.
-     * Si el servidor está ocupado (500/503), lo reintenta hasta 2 veces más.
+     * Si el servidor está ocupado (500/503), lo reintenta hasta 3 veces (esperando 2, 4 y 8 s).
      */
     private suspend fun request(model: String, body: JSONObject, timeoutMs: Int): JSONObject {
         if (apiKey.isBlank()) {
@@ -133,8 +157,8 @@ class GeminiClient(private val apiKey: String) {
                 return requestOnce(model, body, timeoutMs)
             } catch (e: GeminiException) {
                 attempt++
-                if (e.httpCode < 500 || attempt > 2) throw e
-                delay(2_000L * attempt)  // espera 2 s, luego 4 s, y reintenta
+                if (e.httpCode < 500 || attempt > 3) throw e
+                delay(2_000L shl (attempt - 1))  // espera 2 s, 4 s, 8 s y reintenta
             }
         }
     }
@@ -216,6 +240,8 @@ class GeminiClient(private val apiKey: String) {
 /** Convierte cualquier excepción en un texto para el usuario. */
 fun Throwable.toUserMessage(): String = when (this) {
     is GeminiException -> message.orEmpty()
+    is SocketTimeoutException ->
+        "Gemini tardó demasiado en responder (sus servidores pueden estar saturados). Inténtalo de nuevo en un momento."
     is IOException -> "No hay conexión a internet o el servidor no respondió. Revisa tu red."
     else -> "Error inesperado: ${message ?: javaClass.simpleName}"
 }
