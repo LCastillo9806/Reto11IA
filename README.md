@@ -36,7 +36,7 @@ App Android (Kotlin) que integra **inteligencia artificial generativa** en tres 
 
 ## 🎬 Video demostrativo
 
-Recorrido completo de la app (3 min 57 s) grabado en un Samsung Galaxy A03s, con respuestas reales de la IA: chatbot con memoria, generación de texto, generación de imágenes y cambio de personalidad del chatbot. Los tramos de espera aparecen acelerados y lo indica una etiqueta "▶▶ x2 / x3".
+Recorrido completo de la app (3 min 57 s) grabado en un Samsung Galaxy A03s, con respuestas reales de la IA: chatbot con memoria, generación de texto, generación de imágenes y cambio de personalidad del chatbot. Los tramos de espera aparecen acelerados y lo indica una etiqueta "▶▶ x2 a x4".
 
 <a href="video/demo_reto11.mp4"><img src="video/portada.png" width="240" alt="Ver el video demostrativo"></a>
 
