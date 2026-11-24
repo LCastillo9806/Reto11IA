@@ -1,3 +1,5 @@
+<img src="capturas/icono.png" width="96" align="right" alt="Ícono de la app">
+
 # ✨ Reto 11 – Integración con Inteligencia Artificial Generativa
 
 > **Curso:** Desarrollo de Aplicaciones para Dispositivos Móviles · Universidad Nacional de Colombia
@@ -26,6 +28,7 @@ App Android (Kotlin) que integra **inteligencia artificial generativa** en tres 
 - **Generador de imágenes** en cinco estilos: realista, dibujo animado, acuarela, pixel art o render 3D. La imagen se puede **guardar en la galería**.
   - Primero se intenta con el modelo de imágenes de **Gemini**.
   - Si la llave no tiene cuota para imágenes (el nivel gratuito no la incluye), **Gemini mejora la descripción** convirtiéndola en un prompt detallado en inglés, y el **modelo libre Flux** (vía Pollinations.ai) crea la imagen.
+- **Ícono propio:** una hoja cuyas nervaduras terminan en nodos de circuito (la IA "dentro" de la planta) y destellos dorados de IA generativa. Es un ícono adaptativo, con versión de un color para los íconos temáticos de Android 13 o superior.
 - **Formato Markdown** en las respuestas: negritas, cursivas, listas y títulos.
 - **Errores explicados en español:** llave inválida, cuota agotada, modelo no disponible o sin conexión. Si el servidor está ocupado (500/503), la app **reintenta sola**.
 - **Pantalla de Ajustes:** llave de API, modelos de Gemini y personalidad del chatbot.
